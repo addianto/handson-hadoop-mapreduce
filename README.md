@@ -242,6 +242,18 @@ frequently use when interacting with the HDFS.
     >   a different name in the local machine in single `hadoop fs` execution?
     >   How?
 
+- Display content of a file in the HDFS into the shell:
+
+    ```bash
+    $ hadoop fs -cat a_file.txt
+    ```
+
+- Remove a file in the HDFS:
+
+    ```bash
+    $ hadoop fs -rm a_file.txt
+    ```
+
 > [Back to ToC](#table-of-contents)
 
 ## Submitting MapReduce Program
