@@ -14,8 +14,7 @@ know MapReduce programming model.
 1. [Prerequisites](#prerequisites)
 2. [Getting Started](#getting-started)
 3. [Managing Files in HDFS](#managing-files-in-hdfs)
-4. Implementing MapReduce-based Program
-5. Submitting MapReduce-based Program to Hadoop Cluster
+4. [Trying a MapReduce Program](#trying-a-mapreduce-program)
 
 ## Prerequisites
 
@@ -67,12 +66,12 @@ to follow the mini exercises below before proceeding to the next exercise.
 Otherwise, feel free to skip directly to [Managing Files in HDFS](#managing-files-in-hdfs)
 section.
 
-> Note: Most commands in the the shell has the following invocation pattern:
+> Note: Most commands in the shell has the following invocation pattern:
 > `<COMMAND> [<OPTIONS>] <ARGS>` where:
 > - `<COMMAND>` is the command, e.g. `pwd`, `ls`, `cd`
 > - `[<OPTIONS>]` is optional list of options that will change how the command
 >   behaves, e.g. `-l` option when calling `ls`
-> - `<ARGS>` is the argument/parameter that will be read by the command to
+> - `<ARGS>` is list of arguments/parameters that will be read by the command to
 >   perform its functionality, e.g. `mkdir foo` where `foo` is a single value
 >   passed as an argument to `mkdir` command
 
@@ -150,7 +149,7 @@ section.
     $ cat a_file.txt
     ```
 
-    > Question #1: What is the output of `cat` invocation above?
+    > - Question #1: What is the output of `cat` invocation above?
 
 7. `cp`
 
@@ -173,33 +172,142 @@ section.
 
     > Question #1: What happened to `a_file.txt` file?
 
-Good job for reaching the end of the mini exercises! At the very least, now you
-know the basic commands that you can call when interacting with a Linux-based
-computer. In this case, the master node is actually a Linux-based server and
-all exercises in the subsequent sections will require you to call commands in
-the shell. Now you can proceed to the next section.
+Good job for reaching the end of the mini exercises! Now you have the basic
+knowledge on using basic commands that you can call when interacting with a
+Linux-based computer. In this case, the master node is actually a Linux-based
+server and all exercises in the subsequent sections will require you to call
+commands in the shell. You can proceed to the next section.
 
 > [Back to ToC](#table-of-contents)
 
 ## Managing Files in HDFS
 
-TODO
+Contrary to the traditional programming model where we try to **bring the data into the program**,
+MapReduce programming model does the opposite, which is to **bring the program into the data**.
+The data itself are also distributed across multiple nodes in the cluster.
+Therefore, you need to know how to get the data from the cluster and to put the
+data into the cluster using commands that interact with the Hadoop Distributed File
+System (HDFS). Once you are able to manage your data, you can run a MapReduce
+program to perform computation on the distributed data.
+
+You need to know several basic commands provided by basic Hadoop
+installation in the master node to manage data files in the Hadoop Cluster.
+The commands are similar to basic shell commands on Linux-based OS. The
+complete list of commands can be read in the following reference:
+https://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-common/FileSystemShell.html
+
+The following is several examples of basic commands that you will
+frequently use when interacting with the HDFS.
+
+- Get the list of files in HDFS:
+
+    ```bash
+    $ hadoop fs -ls
+    $ hadoop fs -ls /foo/bar
+    ```
+
+    > Explanation: First example will get list of files in the root (topmost)
+    > directory in the HDFS. Second example will get list of files in `/bar`
+    > directory that is present under `/foo` directory in the root of HDFS.
+
+- Copy a file from local machine (server/master node) into HDFS:
+
+    ```bash
+    $ hadoop fs -copyFromLocal a_file.txt
+    # Alternative
+    $ hadoop fs -put a_file.txt
+    ```
+
+    > Explanation: The example above will copy `a_file.txt` file from current
+    > active directory in local machine into the root directory in the HDFS.
+
+- Copy a file within HDFS:
+
+    ```bash
+    $ hadoop fs -cp a_file.txt b_file.txt
+    ```
+
+    > - Question #1: What does `hadoop fs -cp <ARG_1> <ARG_2>` do?
+    > - Hint: Try calling `hadoop fs -ls` after executed the command above
+
+- Copy file from HDFS into local machine:
+
+    ```bash
+    $ hadoop fs -copyToLocal b_file.txt
+    # Alternative
+    $ hadoop fs -get b_file.txt
+    ```
+
+    > - Question #1: Is it possible to copy a file from HDFS and give it
+    >   a different name in the local machine in single `hadoop fs` execution?
+    >   How?
+
+- Display content of a file in the HDFS into the shell:
+
+    ```bash
+    $ hadoop fs -cat a_file.txt
+    ```
+
+- Remove a file in the HDFS:
+
+    ```bash
+    $ hadoop fs -rm a_file.txt
+    ```
 
 > [Back to ToC](#table-of-contents)
 
-## Implementing MapReduce-based Program
+## Trying a MapReduce Program
 
-TODO
+Basic Hadoop installation provides several MapReduce program examples. You can
+see the list of program examples by executing the following commands:
 
-> [Back to ToC](#table-of-contents)
+```bash
+# Change current active directory to your home directory
+$ cd ~
+# Copy the program collection into current directory
+$ cp /opt/hadoop-2.7.3/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.3.jar .
+# Run the program to see list of available MapReduce program examples
+$ hadoop jar hadoop-mapreduce-examples-2.7.3.jar
+```
 
-## Submitting MapReduce-based Program to Hadoop Cluster
+In this session, we will try to run a MapReduce program called `wordcount`. You can
+see the options and arguments required by the program by executing the following command:
 
-TODO
+```bash
+$ hadoop jar hadoop-mapreduce-examples-2.7.3.jar wordcount
+```
+
+The `wordcount` program requires a list of arguments where the first arguments
+are the input files and the last argument is a path to the output directory.
+The input file(s) must be put into the HDFS before can be processed by the program.
+Therefore, you need to copy all the input file(s) into the HDFS before running the
+MapReduce program.
+
+Once you have copied all the input files, you can run the `wordcount` MapReduce
+program by executing the following command:
+
+```bash
+$ hadoop jar hadoop-mapreduce-examples-2.7.3.jar wordcount input/input1.txt input/input2.txt output
+```
+
+> Explanation: The `wordcount` program will use `input1.txt` and `input2.txt` in
+> `input` directory at HDFS as the input data files. The computation results will
+> be written into a new folder called `output` in the HDFS.
+
+Congratulations! You just run your first MapReduce program on Hadoop! Now try to
+copy the results from HDFS to your own directory in local machine and see the
+content of each result files.
 
 > [Back to ToC](#table-of-contents)
 
 ***
+
+## Contributors
+
+- Samuel Louvan
+- Remmy Augusta Menzata Zen
+- Ardhi Putra Pratama Hartono
+- Daya Adianto
 
 ## License
 
