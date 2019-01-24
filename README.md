@@ -67,7 +67,7 @@ to follow the mini exercises below before proceeding to the next exercise.
 Otherwise, feel free to skip directly to [Managing Files in HDFS](#managing-files-in-hdfs)
 section.
 
-> Note: Most commands in the the shell has the following invocation pattern:
+> Note: Most commands in the shell has the following invocation pattern:
 > `<COMMAND> [<OPTIONS>] <ARGS>` where:
 > - `<COMMAND>` is the command, e.g. `pwd`, `ls`, `cd`
 > - `[<OPTIONS>]` is optional list of options that will change how the command
