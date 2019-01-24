@@ -14,7 +14,7 @@ know MapReduce programming model.
 1. [Prerequisites](#prerequisites)
 2. [Getting Started](#getting-started)
 3. [Managing Files in HDFS](#managing-files-in-hdfs)
-4. [Submitting MapReduce Program](#submitting-mapreduce-program)
+4. [Trying a MapReduce Program](#trying-a-mapreduce-program)
 
 ## Prerequisites
 
@@ -194,7 +194,7 @@ You need to know several basic commands provided by basic Hadoop
 installation in the master node to manage data files in the Hadoop Cluster.
 The commands are similar to basic shell commands on Linux-based OS. The
 complete list of commands can be read in the following reference:
-https://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoopcommon/FileSystemShell.html
+https://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-common/FileSystemShell.html
 
 The following is several examples of basic commands that you will
 frequently use when interacting with the HDFS.
@@ -256,9 +256,47 @@ frequently use when interacting with the HDFS.
 
 > [Back to ToC](#table-of-contents)
 
-## Submitting MapReduce Program
+## Trying a MapReduce Program
 
-TODO
+Basic Hadoop installation provides several MapReduce program examples. You can
+see the list of program examples by executing the following commands:
+
+```bash
+# Change current active directory to your home directory
+$ cd ~
+# Copy the program collection into current directory
+$ cp /opt/hadoop-2.7.3/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.3.jar .
+# Run the program to see list of available MapReduce program examples
+$ hadoop jar hadoop-mapreduce-examples-2.7.3.jar
+```
+
+In this session, we will try to run a MapReduce program called `wordcount`. You can
+see the options and arguments required by the program by executing the following command:
+
+```bash
+$ hadoop jar hadoop-mapreduce-examples-2.7.3.jar wordcount
+```
+
+The `wordcount` program requires a list of arguments where the first arguments
+are the input files and the last argument is a path to the output directory.
+The input file(s) must be put into the HDFS before can be processed by the program.
+Therefore, you need to copy all the input file(s) into the HDFS before running the
+MapReduce program.
+
+Once you have copied all the input files, you can run the `wordcount` MapReduce
+program by executing the following command:
+
+```bash
+$ hadoop jar hadoop-mapreduce-examples-2.7.3.jar wordcount input/input1.txt input/input2.txt output
+```
+
+> Explanation: The `wordcount` program will use `input1.txt` and `input2.txt` in
+> `input` directory at HDFS as the input data files. The computation results will
+> be written into a new folder called `output` in the HDFS.
+
+Congratulations! You just run your first MapReduce program on Hadoop! Now try to
+copy the results from HDFS to your own directory in local machine and see the
+content of each result files.
 
 > [Back to ToC](#table-of-contents)
 
@@ -270,7 +308,6 @@ TODO
 - Remmy Augusta Menzata Zen
 - Ardhi Putra Pratama Hartono
 - Daya Adianto
-
 
 ## License
 
