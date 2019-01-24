@@ -14,8 +14,7 @@ know MapReduce programming model.
 1. [Prerequisites](#prerequisites)
 2. [Getting Started](#getting-started)
 3. [Managing Files in HDFS](#managing-files-in-hdfs)
-4. Implementing MapReduce-based Program
-5. Submitting MapReduce-based Program to Hadoop Cluster
+4. [Submitting MapReduce Program](#submitting-mapreduce-program)
 
 ## Prerequisites
 
@@ -187,13 +186,7 @@ TODO
 
 > [Back to ToC](#table-of-contents)
 
-## Implementing MapReduce-based Program
-
-TODO
-
-> [Back to ToC](#table-of-contents)
-
-## Submitting MapReduce-based Program to Hadoop Cluster
+## Submitting MapReduce Program
 
 TODO
 
