@@ -71,7 +71,7 @@ section.
 > - `<COMMAND>` is the command, e.g. `pwd`, `ls`, `cd`
 > - `[<OPTIONS>]` is optional list of options that will change how the command
 >   behaves, e.g. `-l` option when calling `ls`
-> - `<ARGS>` is the argument/parameter that will be read by the command to
+> - `<ARGS>` is list of arguments/parameters that will be read by the command to
 >   perform its functionality, e.g. `mkdir foo` where `foo` is a single value
 >   passed as an argument to `mkdir` command
 
@@ -149,7 +149,7 @@ section.
     $ cat a_file.txt
     ```
 
-    > Question #1: What is the output of `cat` invocation above?
+    > - Question #1: What is the output of `cat` invocation above?
 
 7. `cp`
 
@@ -182,7 +182,66 @@ commands in the shell. You can proceed to the next section.
 
 ## Managing Files in HDFS
 
-TODO
+Contrary to the traditional programming model where we try to **bring the
+data into the program**, MapReduce programming model does the opposite,
+which is to **bring the program into the data**. The data itself are
+also distributed across multiple nodes in the cluster. Therefore, you need
+to know how to get the data from the cluster and to put the data into the
+cluster using commands that interact with the Hadoop Distributed File
+System (HDFS). Once you are able to manage your data, you can run a MapReduce
+program to perform computation on the distributed data.
+
+You need to know several basic commands provided by basic Hadoop
+installation in the master node to manage data files in the Hadoop Cluster.
+The commands are similar to basic shell commands on Linux-based OS. The
+complete list of commands can be read in the following reference:
+https://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoopcommon/FileSystemShell.html
+
+The following is several examples of basic commands that you will
+frequently use when interacting with the HDFS.
+
+- Get the list of files in HDFS:
+
+    ```bash
+    $ hadoop fs -ls
+    $ hadoop fs -ls /foo/bar
+    ```
+
+    > Explanation: First example will get list of files in the root (topmost)
+    > directory in the HDFS. Second example will get list of files in `/bar`
+    > directory that is present under `/foo` directory in the root of HDFS.
+
+- Copy a file from local machine (server/master node) into HDFS:
+
+    ```bash
+    $ hadoop fs -copyFromLocal a_file.txt
+    # Alternative
+    $ hadoop fs -put a_file.txt
+    ```
+
+    > Explanation: The example above will copy `a_file.txt` file from current
+    > active directory in local machine into the root directory in the HDFS.
+
+- Copy a file within HDFS:
+
+    ```bash
+    $ hadoop fs -cp a_file.txt b_file.txt
+    ```
+
+    > - Question #1: What does `hadoop fs -cp <ARG_1> <ARG_2>` do?
+    > - Hint: Try calling `hadoop fs -ls` after executed the command above
+
+- Copy file from HDFS into local machine:
+
+    ```bash
+    $ hadoop fs -copyToLocal b_file.txt
+    # Alternative
+    $ hadoop fs -get b_file.txt
+    ```
+
+    > - Question #1: Is it possible to copy a file from HDFS and give it
+    > a different name in the local machine in single `hadoop fs` execution?
+    > How?
 
 > [Back to ToC](#table-of-contents)
 
