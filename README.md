@@ -173,11 +173,11 @@ section.
 
     > Question #1: What happened to `a_file.txt` file?
 
-Good job for reaching the end of the mini exercises! At the very least, now you
-know the basic commands that you can call when interacting with a Linux-based
-computer. In this case, the master node is actually a Linux-based server and
-all exercises in the subsequent sections will require you to call commands in
-the shell. Now you can proceed to the next section.
+Good job for reaching the end of the mini exercises! Now you have the basic
+knowledge on using basic commands that you can call when interacting with a
+Linux-based computer. In this case, the master node is actually a Linux-based
+server and all exercises in the subsequent sections will require you to call
+commands in the shell. You can proceed to the next section.
 
 > [Back to ToC](#table-of-contents)
 
