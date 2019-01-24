@@ -182,12 +182,11 @@ commands in the shell. You can proceed to the next section.
 
 ## Managing Files in HDFS
 
-Contrary to the traditional programming model where we try to **bring the
-data into the program**, MapReduce programming model does the opposite,
-which is to **bring the program into the data**. The data itself are
-also distributed across multiple nodes in the cluster. Therefore, you need
-to know how to get the data from the cluster and to put the data into the
-cluster using commands that interact with the Hadoop Distributed File
+Contrary to the traditional programming model where we try to **bring the data into the program**,
+MapReduce programming model does the opposite, which is to **bring the program into the data**.
+The data itself are also distributed across multiple nodes in the cluster.
+Therefore, you need to know how to get the data from the cluster and to put the
+data into the cluster using commands that interact with the Hadoop Distributed File
 System (HDFS). Once you are able to manage your data, you can run a MapReduce
 program to perform computation on the distributed data.
 
@@ -240,8 +239,8 @@ frequently use when interacting with the HDFS.
     ```
 
     > - Question #1: Is it possible to copy a file from HDFS and give it
-    > a different name in the local machine in single `hadoop fs` execution?
-    > How?
+    >   a different name in the local machine in single `hadoop fs` execution?
+    >   How?
 
 > [Back to ToC](#table-of-contents)
 
@@ -252,6 +251,14 @@ TODO
 > [Back to ToC](#table-of-contents)
 
 ***
+
+## Contributors
+
+- Samuel Louvan
+- Remmy Augusta Menzata Zen
+- Ardhi Putra Pratama Hartono
+- Daya Adianto
+
 
 ## License
 
